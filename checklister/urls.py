@@ -8,6 +8,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'event.views.home', name='home'),
 
+    url(r'^form/(?P<event_id>\d+)$', 'event.views.form', name='home'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

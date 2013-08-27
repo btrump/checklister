@@ -1,0 +1,52 @@
+<pre>
+	{{ forms|pprint }}")
+</pre>
+<table>
+{% for name, form in forms %}
+	<tr>
+		<td colspan=2>
+			{{ name }}
+		</td>
+	</tr>
+	<tr>
+	{% if name == 'inventories' %}
+			<td colspan=2>
+				<table>
+					<tr>
+						{% for inventory_name, inventory in form %}
+							<td>{{ inventory_name }}</td>
+							<td class="form">
+								<table class="container">
+									{{ inventory.form }}
+								</table>
+							</td>
+							</tr>
+							<tr>
+								<table class="inventory">
+									{% for item_entry in inventory.item_entries %}
+						      <tr>
+						        <td class="name">{{ item_entry.name }}</td>
+						        <td class="image">{{ item_entry.image }}</td>
+						        <td class="unit">{{ item_entry.unit }}</td>
+						        <td class="quantity">{{ item_entry.quantity|floatformat }}</td>
+						        <td class="quantity">{{ item_entry.get_quantity|floatformat }}</td>
+						        <td class="cost">${{ item_entry.item.price }}</td>
+						        <td class="cost">${{ item_entry.get_cost|floatformat:2 }}</td>
+						        <td class="acquired"><input type="checkbox" {% if entry.acquired %}CHECKED{% endif %} /></td>
+						      </tr>
+									{% endfor %}
+						{% endfor %}
+						</tr>
+					</table>
+					</tr>
+				</table>
+			</td>
+	{% else %}
+		{% for field in form %}
+			<td>{{ field.label_tag }}</td>
+			<td>{{ field.name }}</td>
+		{% endfor %}
+	{% endif %}
+	</tr>
+{% endfor %}
+</table>
