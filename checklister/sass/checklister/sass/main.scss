@@ -1,0 +1,79 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald|Open+Sans:400,600);
+@import "form";
+
+body {
+  font-family:'Open Sans', Arial, Helvetica;
+}
+table td {
+  vertical-align: top;
+}
+.event {
+  margin: 2% auto;
+  padding: 0.5% 2%;
+
+}
+table th {
+  text-align: center;
+}
+.name {
+  font-weight:bold;
+}
+.cost {
+  text-align:right;
+}
+.quantity {
+  text-align:right;
+}
+.cost.total {
+  font-weight:bold;
+}
+.total-text {
+  text-align:right;
+}
+.acquired {
+  text-align:center;
+}
+.image {
+  text-align:center;
+}
+.image img {
+  max-width:75px;
+  max-height:60px;
+}
+input[id*="checklist_item_"] {
+  display: none;
+}
+input[type="checkbox"] + label {
+  display: inline;
+  position: relative;
+  background-color: #b94a48;
+  
+  /*label styling*/
+  padding: 2px 4px;
+  line-height: 1.5em;
+  font-weight: bold;
+  color: #ffffff;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+input[type="checkbox"]:checked + label {
+    background-color: #468847;
+}
+
+input[type="checkbox"]:disabled + label {
+    opacity: 0.5;
+}
+.checklist_item_name {
+  font-size:1.2em;
+}
+.complete_True {
+  text-decoration:line-through;
+  font-style:italic;
+}
+.checklist_item_wrapper {
+  margin-left:8px;
+}

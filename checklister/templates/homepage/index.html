@@ -141,7 +141,7 @@ body {
 		      		Total:
 		      	</td>
 		      	<td class="cost total">
-		      		${{ inventory.get_cost|floatformat:2 }}
+		      		${{ inventory.price|floatformat:2 }}
 		      	</td>
 		      	<td></td>
 		      </tr>
@@ -150,7 +150,7 @@ body {
 		      		Total/{{ inventory.multiplier_unit }}:
 		      	</td>
 		      	<td class="cost total">
-		      		${{ inventory.get_cost_per_unit|floatformat:2 }}
+		      		${{ inventory.price_per_unit|floatformat:2 }}
 		      	</td>
 		      	<td></td>
 		      </tr>

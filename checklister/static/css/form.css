@@ -1,0 +1,14 @@
+/* line 2, ../../sass/checklister/sass/form.scss */
+form.event input[type="text"] {
+  border: 1px solid transparent;
+  background: transparent;
+}
+/* line 5, ../../sass/checklister/sass/form.scss */
+form.event input[type="text"]:hover {
+  background: yellow;
+  border: 1px dashed #999;
+}
+/* line 9, ../../sass/checklister/sass/form.scss */
+form.event input[type="text"]:focus {
+  background: yellow;
+}

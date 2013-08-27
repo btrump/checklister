@@ -8,11 +8,13 @@ class EventForm(ModelForm):
   class Meta:
     model = Event
     fields = ('name',)
-      
+
 class InventoryForm(ModelForm):
   name = forms.CharField(label='Name')
   multiplier = forms.IntegerField()
   multiplier_unit = forms.CharField()
+  price = forms.DecimalField(decimal_places=2)
+  price_per_unit = forms.DecimalField(decimal_places=2)
 
   class Meta:
     model = Inventory
@@ -23,8 +25,10 @@ class ItemEntryForm(ModelForm):
   name = forms.CharField()
   image = forms.ImageField()
   unit = forms.CharField()
-  quantity_per_unit = forms.DecimalField(decimal_places=2)
+  quantity = forms.DecimalField(decimal_places=2)
   quantity_total = forms.DecimalField(decimal_places=2)
+  price = forms.DecimalField(decimal_places=2)
+  price_total = forms.DecimalField(decimal_places=2)
   acquired = forms.BooleanField()
   
   class Meta:

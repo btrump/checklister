@@ -22,3 +22,15 @@ class ItemEntry(models.Model):
   
   def get_cost(self):
     return self.item.price * self.quantity * self.inventory.multiplier
+  
+  def get_form_data(self):
+    data = {
+            'name':self.item,
+            'image': self.item.image.url,
+            'unit': self.item.unit,
+            'quantity': self.quantity,
+            'quantity_total': self.get_quantity(),
+            'price': self.item.price,
+            'price_total': self.get_cost()
+            }
+    return data

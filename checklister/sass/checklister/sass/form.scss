@@ -1,0 +1,13 @@
+form.event {
+  input[type="text"] {
+    border: 1px solid transparent;
+    background: transparent;
+    &:hover {
+      background: yellow;
+      border:1px dashed #999;
+    }
+    &:focus {
+      background: yellow;
+    }
+  }
+}

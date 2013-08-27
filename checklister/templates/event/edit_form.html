@@ -1,52 +1,101 @@
+{% extends 'base.html' %}
+{% block extended_head %}
+{% endblock %}
+{% block main_content %}
 <pre>
-	{{ forms|pprint }}")
+  {{ event|pprint }}
 </pre>
-<table>
-{% for name, form in forms %}
-	<tr>
-		<td colspan=2>
-			{{ name }}
-		</td>
-	</tr>
-	<tr>
-	{% if name == 'inventories' %}
-			<td colspan=2>
-				<table>
-					<tr>
-						{% for inventory_name, inventory in form %}
-							<td>{{ inventory_name }}</td>
-							<td class="form">
-								<table class="container">
-									{{ inventory.form }}
-								</table>
-							</td>
-							</tr>
-							<tr>
-								<table class="inventory">
-									{% for item_entry in inventory.item_entries %}
-						      <tr>
-						        <td class="name">{{ item_entry.name }}</td>
-						        <td class="image">{{ item_entry.image }}</td>
-						        <td class="unit">{{ item_entry.unit }}</td>
-						        <td class="quantity">{{ item_entry.quantity|floatformat }}</td>
-						        <td class="quantity">{{ item_entry.get_quantity|floatformat }}</td>
-						        <td class="cost">${{ item_entry.item.price }}</td>
-						        <td class="cost">${{ item_entry.get_cost|floatformat:2 }}</td>
-						        <td class="acquired"><input type="checkbox" {% if entry.acquired %}CHECKED{% endif %} /></td>
-						      </tr>
-									{% endfor %}
-						{% endfor %}
-						</tr>
-					</table>
-					</tr>
-				</table>
-			</td>
-	{% else %}
-		{% for field in form %}
-			<td>{{ field.label_tag }}</td>
-			<td>{{ field.name }}</td>
-		{% endfor %}
-	{% endif %}
-	</tr>
+{% for field in event %}
+  {{ field }}
 {% endfor %}
-</table>
+{% for name, form in forms %}
+<form class="event">
+  <h2>{{ name|capfirst }}</h2>
+    <h5 style="font-style:italic;">@{{ event.date }}</h5>
+    <h5>{{ event.time_remaining }} remain.</h5>
+    {% for checklist in event.checklist_set.all %}
+      <h3>{{ checklist }}</h3>
+      <table>
+        {% for checklist_item in checklist.checklistitem_set.all %}
+        <tr>        
+          <td>
+            <input type="checkbox" id="checklist_item_{{ forloop.counter0 }}" {% if checklist_item.complete %}CHECKED{% endif %} /> 
+            <label for="checklist_item_{{ forloop.counter0 }}">X</label>
+          </td>
+          <td class="checklist_item">
+            <div class="checklist_item_wrapper">
+              <div class="checklist_item_name complete_{{ checklist_item.complete }}">{{ checklist_item }}</div>
+              {% if checklist_item.complete != None %}
+              <div class="checklist_item_description">
+                {{ checklist_item.description }}
+              </div>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% endfor %}
+    {% if name == 'inventories' %}
+      <td colspan=2>
+        <table>
+          <tr>
+            {% for inventory_name, inventory in form %}
+              <h3>{{ inventory_name }}</h3>
+              <!-- <h4>{{ inventory.multiplier }} {{ inventory.multiplier_unit|capfirst }}{{ inventory.multiplier_unit|pluralize }}</h4> -->
+              <table>
+                Instance: {{ inventory.form.instance.image.url }}
+                <hr />
+                {{ inventory.form }}
+              </table>
+        
+              </ul>
+              <table class="table table-striped table-bordered table-hover table-responsive table-condensed">
+                <tr>
+                  <th colspan=2>item</th>
+                  <th>unit</th>
+                  <th>qty/{{ inventory.multiplier_unit }}</th>
+                  <th>total qty</th>
+                  <th>$/ea</th>
+                  <th>$ total</th>
+                  <th>Acquired?</th>
+                </tr>
+                {% for item_entry in inventory.item_entries %}
+                <tr>
+                  <td class="name">{{ item_entry.name }}</td>
+                  <td class="image"><img src="{{ inventory.form.instance.image.url }}" />
+                    {{ item_entry.image }}</td>
+                  <td class="unit">{{ item_entry.unit }}</td>
+                  <td class="quantity">{{ item_entry.quantity }}</td>
+                  <td class="quantity">{{ item_entry.quantity_total }}</td>
+                  <td class="cost">${{ item_entry.price }}</td>
+                  <td class="cost">${{ item_entry.price_total }}</td>
+                  <td class="acquired"><input type="checkbox" {% if entry.acquired %}CHECKED{% endif %} /></td>
+                </tr>
+                {% endfor %}
+                <footer>
+                  <tr class="danger">
+                    <td colspan=6 class="total-text">
+                      Total:
+                    </td>
+                    <td class="cost total">
+                      ${{ inventory.get_cost|floatformat:2 }}
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr class="warning">
+                    <td colspan=6 class="total-text">
+                      Total/{{ inventory.multiplier_unit }}:
+                    </td>
+                    <td class="cost total">
+                      ${{ inventory.get_cost_per_unit|floatformat:2 }}
+                    </td>
+                    <td></td>
+                  </tr>
+                </footer>
+              </table>
+            {% endfor %}
+      {% endif %}
+</form>
+{% endfor %}
+{% endblock %}

@@ -16,11 +16,7 @@ def form(request, *args, **kwargs):
   for inventory in Inventory.objects.filter(event=event.id):
     item_entries = []
     for item_entry in ItemEntry.objects.filter(inventory=inventory.id):
-      item_entry_form = ItemEntryForm({
-                                       'name': item_entry.item
-                                       },
-                                      instance=item_entry)
-
+      item_entry_form = ItemEntryForm(item_entry.get_form_data(), instance=item_entry)
       item_entries.append(item_entry_form)
     inventories[inventory.name] = dict({
                                         'form': InventoryForm(instance=inventory),
@@ -30,6 +26,6 @@ def form(request, *args, **kwargs):
            'event': EventForm(instance=event),
            'inventories': inventories.iteritems(),
            }
-  kwargs.update({'forms':forms.iteritems()})
+  kwargs.update({'forms':forms.iteritems(), 'event': EventForm(instance=event, prefix='event')})
   context = RequestContext(request, kwargs)
   return render_to_response('event/edit_form.html', context)

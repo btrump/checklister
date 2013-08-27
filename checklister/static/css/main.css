@@ -1,0 +1,126 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald|Open+Sans:400,600);
+/* line 2, ../../sass/checklister/sass/form.scss */
+form.event input[type="text"] {
+  border: 1px solid transparent;
+  background: transparent;
+}
+/* line 5, ../../sass/checklister/sass/form.scss */
+form.event input[type="text"]:hover {
+  background: yellow;
+  border: 1px dashed #999;
+}
+/* line 9, ../../sass/checklister/sass/form.scss */
+form.event input[type="text"]:focus {
+  background: yellow;
+}
+
+/* line 4, ../../sass/checklister/sass/main.scss */
+body {
+  font-family: 'Open Sans', Arial, Helvetica;
+}
+
+/* line 7, ../../sass/checklister/sass/main.scss */
+table td {
+  vertical-align: top;
+}
+
+/* line 10, ../../sass/checklister/sass/main.scss */
+.event {
+  margin: 2% auto;
+  padding: 0.5% 2%;
+}
+
+/* line 15, ../../sass/checklister/sass/main.scss */
+table th {
+  text-align: center;
+}
+
+/* line 18, ../../sass/checklister/sass/main.scss */
+.name {
+  font-weight: bold;
+}
+
+/* line 21, ../../sass/checklister/sass/main.scss */
+.cost {
+  text-align: right;
+}
+
+/* line 24, ../../sass/checklister/sass/main.scss */
+.quantity {
+  text-align: right;
+}
+
+/* line 27, ../../sass/checklister/sass/main.scss */
+.cost.total {
+  font-weight: bold;
+}
+
+/* line 30, ../../sass/checklister/sass/main.scss */
+.total-text {
+  text-align: right;
+}
+
+/* line 33, ../../sass/checklister/sass/main.scss */
+.acquired {
+  text-align: center;
+}
+
+/* line 36, ../../sass/checklister/sass/main.scss */
+.image {
+  text-align: center;
+}
+
+/* line 39, ../../sass/checklister/sass/main.scss */
+.image img {
+  max-width: 75px;
+  max-height: 60px;
+}
+
+/* line 43, ../../sass/checklister/sass/main.scss */
+input[id*="checklist_item_"] {
+  display: none;
+}
+
+/* line 46, ../../sass/checklister/sass/main.scss */
+input[type="checkbox"] + label {
+  display: inline;
+  position: relative;
+  background-color: #b94a48;
+  /*label styling*/
+  padding: 2px 4px;
+  line-height: 1.5em;
+  font-weight: bold;
+  color: #ffffff;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 63, ../../sass/checklister/sass/main.scss */
+input[type="checkbox"]:checked + label {
+  background-color: #468847;
+}
+
+/* line 67, ../../sass/checklister/sass/main.scss */
+input[type="checkbox"]:disabled + label {
+  opacity: 0.5;
+}
+
+/* line 70, ../../sass/checklister/sass/main.scss */
+.checklist_item_name {
+  font-size: 1.2em;
+}
+
+/* line 73, ../../sass/checklister/sass/main.scss */
+.complete_True {
+  text-decoration: line-through;
+  font-style: italic;
+}
+
+/* line 77, ../../sass/checklister/sass/main.scss */
+.checklist_item_wrapper {
+  margin-left: 8px;
+}
